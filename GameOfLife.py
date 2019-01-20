@@ -4,6 +4,16 @@ from time import sleep
 from copy import deepcopy
 import os
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def clearConsole():
     os.system('cls' if os.name=='nt' else 'clear')
 
@@ -15,8 +25,8 @@ class GOL:
         self.cellsRepresentation = {
             0: ' ',
             1: '#',
-            2: '@',
-            3: '^'
+            2: bcolors.OKGREEN + '@' + bcolors.ENDC,
+            3: bcolors.OKBLUE + '^' + bcolors.ENDC
         }
         self.delay = delay
     
@@ -81,7 +91,7 @@ parser.add_argument('--delay', '-d', type=float, action='store', help='Delay bef
 args = parser.parse_args()
 
 gol = GOL(
-            5 if args.size < 5 or args.size > 25 else args.size,
+            5 if args.size < 5 or args.size > 50 else args.size,
             args.delay
     )
 gol.startGame()
